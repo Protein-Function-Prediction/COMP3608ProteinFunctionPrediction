@@ -1,0 +1,26 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# Models (VERY IMPORTANT for your project)
+models/
+*.pt
+*.pth
+*.pkl
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs / outputs
+*.log
+outputs/
+results/
