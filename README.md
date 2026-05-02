@@ -87,6 +87,6 @@ Best model is selected using:
 
 ##  How to Run
 
-### 1. Install dependencies
+### Install dependencies
 ```bash
 pip install -r requirements.txt

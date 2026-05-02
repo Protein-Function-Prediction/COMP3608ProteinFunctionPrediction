@@ -20,19 +20,9 @@ models/
 .DS_Store
 Thumbs.db
 
-# Logs / outputs
-*.log
-outputs/
-results/
-
 # Large datasets
 data/
 *.zip
 *.fasta
 *.tsv
 *.csv
-
-# Models
-models/
-*.pt
-*.pth
