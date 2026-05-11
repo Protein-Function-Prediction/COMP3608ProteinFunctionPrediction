@@ -1,92 +1,56 @@
-# Protein Function Prediction using Deep Learning (CNN + Classical ML)
+# COMP 3608 – Protein Function Prediction
 
-This project focuses on predicting **protein functions (Gene Ontology terms)** from amino acid sequences using a combination of:
-
-- Convolutional Neural Networks (CNN)
-- Classical machine learning models (Logistic Regression, Linear SVM)
-- Hyperparameter tuning via random search
+A machine learning pipeline that classifies protein function using biophysical descriptors. Each notebook focuses on one dataset and runs all three models — Logistic Regression, SVM (RBF), and a 1-D CNN — on that dataset before moving to the next.
 
 ---
 
-## 📁 Project Structure
+## Repository Structure
 
-models/ # Saved trained and tuned CNN models
-data/ # Protein datasets (FASTA, CSV, TSV files)
-notebooks/ # Jupyter notebooks for experiments
-utils/ # Helper functions (preprocessing, encoding, etc.)
-
-
----
-
-##  Datasets
-
-Three datasets are used:
-
-### 1. Protein GO Dataset
-- Protein sequences with GO annotations
-
-### 2. CAFA 5 Dataset
-- Large-scale benchmark for protein function prediction
-
-### 3. Human Protein Dataset
-- Real human protein sequences with functional annotations
+```
+COMP3608ProteinFunctionPrediction/
+│
+├── .gitignore
+├── README.md
+├── requirements.txt
+│
+├── dataset1.ipynb      # All models on df1 – 5-class protein functional type
+├── dataset2.ipynb      # All models on df2 – 20-class GO cellular component
+└── dataset3.ipynb      # All models on df3 – 10-class GO molecular function
+```
 
 ---
 
-##  Preprocessing Pipeline
+## Datasets
 
-Each dataset undergoes:
-
-1. Loading raw sequences
-2. Extracting GO terms
-3. Filtering rare labels (frequency thresholding)
-4. Converting sequences into k-mer feature vectors
-5. Multi-label binarization
-6. Train/test split
+| Notebook | Dataset | Classes | Task |
+|----------|---------|---------|------|
+| `dataset1.ipynb` | Bioinformatics Simulated (df1) | 5 | Broad protein functional type (Enzyme, Receptor, Structural, Transporter, Other) |
+| `dataset2.ipynb` | UniProt GO Annotations (df2) | 20 | GO cellular component terms |
+| `dataset3.ipynb` | Human Proteome + GO Annotations (df3) | 10 | GO molecular function terms |
 
 ---
 
-##  Models
+## How to Run
 
-### 🔹 CNN Model
-- 1D convolution over k-mer features
-- Dropout regularization
-- Sigmoid activation for multi-label classification
-- Binary cross-entropy loss
-
-###  Baseline Models
-- Logistic Regression
-- Linear SVM
+Each notebook is **self-contained** — it downloads its own dataset, preprocesses it, and runs all three models (LR → SVM → CNN) in sequence. Run the notebooks in any order, independently of each other.
 
 ---
 
-##  Hyperparameter Tuning
+## Setup
 
-Random search is used to optimize the CNN:
-
-- Learning rate: `0.01, 0.001, 0.0001`
-- Batch size: `32, 64, 128`
-- Dropout: `0.2, 0.3, 0.5`
-- Epochs: dataset-dependent
-
-Best model is selected using:
-- **Micro-average AUROC**
-
----
-
-##  Evaluation Metrics
-
-- Micro F1 Score
-- Macro F1 Score
-- AUROC
-- AUPR (Area Under Precision-Recall Curve)
-- F-max
-- Hamming Loss
-
----
-
-##  How to Run
+All notebooks run on **Google Colab**. To use GPU (recommended for CNN):
+`Runtime → Change runtime type → T4 GPU`
 
 ### Install dependencies
+
+Each notebook installs its own dependencies at the top. To install locally:
+
 ```bash
 pip install -r requirements.txt
+```
+
+### Kaggle Authentication
+
+Datasets are downloaded via `kagglehub`. On Colab, either:
+- Upload your `kaggle.json` API token, or
+- Run `kagglehub.login()` and follow the prompts
